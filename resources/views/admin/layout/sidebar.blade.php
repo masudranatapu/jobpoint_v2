@@ -17,7 +17,7 @@
             <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
 
                 <div class="nav-item">
-                <a class="nav-link active" href="{{ route('admin.dashboard') }}" data-placement="left">
+                <a class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}" data-placement="left">
                     <i class="bi-house nav-icon"></i>
                     <span class="nav-link-title">Dashboard</span>
                 </a>
@@ -27,7 +27,7 @@
                 <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                 <div class="nav-item">
-                <a class="nav-link " href="/admin/organizations/index.html" data-placement="left">
+                <a class="nav-link {{ Route::is('admin.organizations') ? 'active' : '' }}" href="{{ route('admin.organizations') }}" data-placement="left">
                     <i class="bi-building nav-icon"></i>
                     <span class="nav-link-title">Organizations</span>
                 </a>

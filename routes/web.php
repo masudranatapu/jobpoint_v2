@@ -28,6 +28,8 @@ Auth::routes();
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // organizations
+    Route::get('/organizations', [DashboardController::class, 'organizations'])->name('organizations');
 });
 
 Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['auth', 'user']], function () {

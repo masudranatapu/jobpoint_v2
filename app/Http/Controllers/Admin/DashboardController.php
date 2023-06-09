@@ -14,4 +14,8 @@ class DashboardController extends Controller
         return view('admin.index', compact('title'));
     }
 
+    function organizations() {
+        return view('admin.organizations.index');
+    }
+
 }
