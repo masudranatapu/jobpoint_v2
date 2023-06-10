@@ -30,6 +30,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // organizations
     Route::get('/organizations', [DashboardController::class, 'organizations'])->name('organizations');
+    // jobs
+    Route::get('/jobs', [DashboardController::class, 'jobs'])->name('jobs');
+    // candidates
+    Route::get('/candidates', [DashboardController::class, 'candidates'])->name('candidates');
 });
 
 Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['auth', 'user']], function () {

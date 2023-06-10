@@ -18,4 +18,14 @@ class DashboardController extends Controller
         return view('admin.organizations.index');
     }
 
+    public function jobs()
+    {
+        return view('admin.jobs.index');
+    }
+    
+    public function candidates()
+    {
+        return view('admin.candidates.index');
+    }
+
 }

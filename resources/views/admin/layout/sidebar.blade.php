@@ -34,14 +34,14 @@
                 </div>
 
                 <div class="nav-item">
-                <a class="nav-link " href="/admin/jobs/index.html" data-placement="left">
+                <a class="nav-link {{ Route::is('admin.jobs') ? 'active' : '' }}" href="{{ route('admin.jobs') }}" data-placement="left">
                     <i class="bi-briefcase nav-icon"></i>
                     <span class="nav-link-title">Jobs</span>
                 </a>
                 </div>
 
                 <div class="nav-item">
-                <a class="nav-link " href="/admin/candidates/index.html" data-placement="left">
+                <a class="nav-link {{ Route::is('admin.candidates') ? 'active' : '' }}" href="{{ route('admin.candidates') }}" data-placement="left">
                     <i class="bi-people nav-icon"></i>
                     <span class="nav-link-title">Candidates</span>
                 </a>
