@@ -32,8 +32,29 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('/organizations', [DashboardController::class, 'organizations'])->name('organizations');
     // jobs
     Route::get('/jobs', [DashboardController::class, 'jobs'])->name('jobs');
-    // candidates
+    Route::get('/job-types', [DashboardController::class, 'jobTypes'])->name('job.types');
+    // candidates 
     Route::get('/candidates', [DashboardController::class, 'candidates'])->name('candidates');
+    // categories
+    Route::get('/categories', [DashboardController::class, 'categories'])->name('categories');
+    // currencies
+    Route::get('/currencies', [DashboardController::class, 'currencies'])->name('currencies');
+    // departments
+    Route::get('/departments', [DashboardController::class, 'departments'])->name('departments');
+    // designations
+    Route::get('/designations', [DashboardController::class, 'designations'])->name('designations');
+    // experience
+    Route::get('/experience', [DashboardController::class, 'experience'])->name('experience');
+    // industries
+    Route::get('/industries', [DashboardController::class, 'industries'])->name('industries');
+    // locations
+    Route::get('/locations', [DashboardController::class, 'locations'])->name('locations');
+    // sallary
+    Route::get('/salary-types', [DashboardController::class, 'salaryTypes'])->name('salary.types');
+    // skills
+    Route::get('/skills', [DashboardController::class, 'skills'])->name('skills');
+    // general
+    Route::get('/general', [DashboardController::class, 'general'])->name('general');
 });
 
 Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['auth', 'user']], function () {

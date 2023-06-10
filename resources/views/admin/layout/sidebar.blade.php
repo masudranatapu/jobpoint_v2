@@ -71,16 +71,16 @@
 
                 <div id="navbarSubMenuUtilities" class="nav-collapse collapse" data-bs-parent="#navbarMenuUtilities">
                     <a class="nav-link" href="/admin/utilities/candidate-archives/index.html">Candidate Archives</a>
-                    <a class="nav-link" href="/admin/utilities/industries/index.html">Industries</a>
-                    <a class="nav-link" href="/admin/utilities/departments/index.html">Departments</a>
-                    <a class="nav-link" href="/admin/utilities/designations/index.html">Designations</a>
-                    <a class="nav-link " href="/admin/utilities/job-types/index.html">Job Types</a>
-                    <a class="nav-link " href="/admin/utilities/categories/index.html">Categories</a>
-                    <a class="nav-link " href="/admin/utilities/skills/index.html">Skills</a>
-                    <a class="nav-link " href="/admin/utilities/experience/index.html">Experience</a>                
-                    <a class="nav-link " href="/admin/utilities/salary-types/index.html">Salary Types</a>
-                    <a class="nav-link " href="/admin/utilities/locations/index.html">Locations</a>
-                    <a class="nav-link " href="/admin/utilities/currencies/index.html">Currencies</a>                
+                    <a class="nav-link" href="{{route('admin.industries')}}">Industries</a>
+                    <a class="nav-link" href="{{route('admin.departments')}}">Departments</a>
+                    <a class="nav-link" href="{{route('admin.designations')}}">Designations</a>
+                    <a class="nav-link " href="{{route('admin.job.types')}}">Job Types</a>
+                    <a class="nav-link " href="{{route('admin.categories')}}">Categories</a>
+                    <a class="nav-link " href="{{route('admin.skills') }}">Skills</a>
+                    <a class="nav-link " href="{{ route('admin.experience') }}">Experience</a>                
+                    <a class="nav-link " href="{{route('admin.salary.types')}}">Salary Types</a>
+                    <a class="nav-link " href="{{ route('admin.locations')}}">Locations</a>
+                    <a class="nav-link " href="{{route('admin.currencies')}}">Currencies</a>                
                 </div>
                 </div>
 
@@ -105,7 +105,7 @@
                     </a>
 
                     <div id="navbarSetupMenuSettings" class="nav-collapse collapse " data-bs-parent="#navbarSetupMenu">
-                    <a class="nav-link " href="./ecommerce.html">General</a>
+                    <a class="nav-link " href="{{route('admin.general')}}">General</a>
                     <a class="nav-link " href="./ecommerce-referrals.html">Themes</a>
 
                     <div id="navbarSetupSubMenuSettingsMenuForms">
