@@ -14,7 +14,7 @@ class JobTypeController extends Controller
     function index()
     {
         $jobtypes = JobType::get();
-        return view('admin.jobtype.index', compact('jobtypes'));
+        return view('admin.jobs.job_types', compact('jobtypes'));
     }
     
     function store(Request $request)
@@ -34,7 +34,7 @@ class JobTypeController extends Controller
         return redirect()->back();
     }
 
-    function update(Request $request)
+    function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
@@ -51,7 +51,7 @@ class JobTypeController extends Controller
         return redirect()->back();
     }
 
-    function destory($id) {
+    function destroy($id) {
         $jobtype = JobType::findOrFail($id);
         $jobtype->delete();
         Toastr::success('Job type successfully deleted','Success');

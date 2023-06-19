@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LocationsController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\JobTypeController;
+use App\Http\Controllers\Admin\JobController;
 // user 
 use App\Http\Controllers\User\InformationController;
 
@@ -52,6 +53,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::resource('locations', LocationsController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('jobs-type', JobTypeController::class);
+    Route::resource('jobs', JobController::class);
     // sallary 
     Route::get('/salary-types', [DashboardController::class, 'salaryTypes'])->name('salary.types');
     // skills

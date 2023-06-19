@@ -13,10 +13,11 @@ class DepartmentController extends Controller
     //
     public function index()
     {
-        return view('admin.departments.index');
+        $departments = Department::latest()->get();
+        return view('admin.departments.index', compact('departments'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -24,7 +25,7 @@ class DepartmentController extends Controller
 
         Department::insert([
             'name' => $request->name,
-            'create_at' => Carbon::now(),
+            'created_at' => Carbon::now(),
         ]);
 
         Toastr::success('Department successfully created','Success');
@@ -38,7 +39,7 @@ class DepartmentController extends Controller
             'name' => 'required',
         ]);
 
-        Department::where('id', $request->id)->update([
+        Department::findOrFail($id)->update([
             'name' => $request->name,
             'updated_at' => Carbon::now(),
         ]);
@@ -48,8 +49,9 @@ class DepartmentController extends Controller
 
     }
 
-    function destory($id) {
-        Department::findOrFail($id)->delete();
+    function destroy($id) {
+        $department = Department::findOrFail($id);
+        $department->delete();
         Toastr::success('Department successfully delete','Success');
         return redirect()->back();
     }

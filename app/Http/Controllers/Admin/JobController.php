@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Job;
+use App\Models\Department;
+use App\Models\JobType;
+use App\Models\Location;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 
@@ -17,7 +20,10 @@ class JobController extends Controller
     {
         //
         $jobs = Job::latest()->get();
-        return view('admin.jobs.index', compact('jobs'));
+        $departments = Department::latest()->get();
+        $jobtypes = JobType::latest()->get();
+        $locations = Location::latest()->get();
+        return view('admin.jobs.index', compact('jobs', 'departments', 'jobtypes', 'locations'));
     }
 
     /**
@@ -34,6 +40,7 @@ class JobController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
         $request->validate([
             'name' => 'required',
             'location_id' => 'required',
@@ -108,6 +115,7 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    
     public function destroy(string $id)
     {
         //

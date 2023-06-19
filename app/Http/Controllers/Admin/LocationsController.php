@@ -13,10 +13,11 @@ class LocationsController extends Controller
     //
     public function index()
     {
-        return view('admin.locations.index');
+        $locations = Location::latest()->get();
+        return view('admin.locations.index', compact('locations'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -24,7 +25,7 @@ class LocationsController extends Controller
 
         Location::insert([
             'name' => $request->name,
-            'create_at' => Carbon::now(),
+            'created_at' => Carbon::now(),
         ]);
 
         Toastr::success('Location successfully created','Success');
@@ -38,7 +39,7 @@ class LocationsController extends Controller
             'name' => 'required',
         ]);
 
-        Location::where('id', $request->id)->update([
+        Location::findOrFail($id)->update([
             'name' => $request->name,
             'updated_at' => Carbon::now(),
         ]);
@@ -48,8 +49,9 @@ class LocationsController extends Controller
 
     }
 
-    function destory($id) {
-        Location::findOrFail($id)->delete();
+    function destroy($id) {
+        $locations = Location::findOrFail($id);
+        $locations->delete();
         Toastr::success('Location successfully delete','Success');
         return redirect()->back();
     }

@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.jobs') ? 'active' : '' }}" href="{{ route('admin.jobs') }}"
+                    <a class="nav-link {{ Route::is('admin.jobs.index') ? 'active' : '' }}" href="{{ route('admin.jobs.index') }}"
                         data-placement="left">
                         <i class="bi-briefcase nav-icon"></i>
                         <span class="nav-link-title">Jobs</span>
@@ -77,17 +77,16 @@
 
                         <div id="navbarSubMenuUtilities" class="nav-collapse collapse"
                             data-bs-parent="#navbarMenuUtilities">
-                            <a class="nav-link" href="/admin/utilities/candidate-archives/index.html">Candidate
-                                Archives</a>
-                            <a class="nav-link" href="{{ route('admin.industries') }}">Industries</a>
-                            <a class="nav-link" href="{{ route('admin.designations') }}">Designations</a>
-                            <a class="nav-link " href="{{ route('admin.job.types') }}">Job Types</a>
-                            <a class="nav-link " href="{{ route('admin.categories') }}">Categories</a>
-                            <a class="nav-link " href="{{ route('admin.skills') }}">Skills</a>
-                            <a class="nav-link " href="{{ route('admin.experience') }}">Experience</a>
-                            <a class="nav-link " href="{{ route('admin.salary.types') }}">Salary Types</a>
+                            <!-- <a class="nav-link" href="/admin/utilities/candidate-archives/index.html">Candidate Archives</a> -->
+                            <!-- <a class="nav-link" href="{{ route('admin.industries') }}">Industries</a> -->
+                            <!-- <a class="nav-link" href="{{ route('admin.designations') }}">Designations</a> -->
+                            <a class="nav-link " href="{{ route('admin.jobs-type.index') }}">Job Types</a>
+                            <!-- <a class="nav-link " href="{{ route('admin.categories') }}">Categories</a> -->
+                            <!-- <a class="nav-link " href="{{ route('admin.skills') }}">Skills</a> -->
+                            <!-- <a class="nav-link " href="{{ route('admin.experience') }}">Experience</a> -->
+                            <!-- <a class="nav-link " href="{{ route('admin.salary.types') }}">Salary Types</a> -->
                             <a class="nav-link " href="{{ route('admin.locations.index') }}">Locations</a>
-                            <a class="nav-link " href="{{ route('admin.currencies') }}">Currencies</a>
+                            <!-- <a class="nav-link " href="{{ route('admin.currencies') }}">Currencies</a> -->
                             <a class="nav-link " href="{{ route('admin.departments.index') }}">departments</a>
                         </div>
                     </div>

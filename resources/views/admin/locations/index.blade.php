@@ -11,12 +11,10 @@
                     <h1 class="page-header-title">Locations</h1>
                 </div>
                 <!-- End Col -->
-
                 <div class="col-auto">
                     <a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#createNewLocation">
                         <i class="bi-building me-1"></i> Create Location
                     </a>
-
                     <div id="createNewLocation" class="modal fade" tabindex="-1" role="dialog"
                         aria-labelledby="DeleteWarningTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -29,7 +27,8 @@
                                         aria-label="Close">
                                     </button>
                                 </div>
-                                <form action="">
+                                <form action="{{ route('admin.locations.store') }}" method="POST">
+                                    @csrf
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="fron-group">
@@ -51,12 +50,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Col -->
             </div>
-            <!-- End Row -->
         </div>
-        <!-- End Page Header -->
-
         <!-- Stats -->
         <div class="row">
 
@@ -95,95 +90,78 @@
                         class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
+                                <th>SL NO</th>
                                 <th>Name</th>
-                                <th>Country</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><span class="h5 text-inherit">Dhaka</span></td>
-                                <td>Bangladesh</td>
-                                <td>
-                                    <a href="/./admin/organizations/1/edit/index.html" class="btn btn-white btn-sm"><i
-                                            class="bi-pencil-fill me-1"></i> Edit</a>
-                                    <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#DeleteWarning"><i class="bi-x-lg me-1"></i> Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><span class="h5 text-inherit">Mumbai</span></td>
-                                <td>India</td>
-                                <td>
-                                    <a href="/./admin/organizations/1/edit/index.html" class="btn btn-white btn-sm"><i
-                                            class="bi-pencil-fill me-1"></i> Edit</a>
-                                    <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#DeleteWarning"><i class="bi-x-lg me-1"></i> Delete</button>
-                                </td>
-                            </tr>
+                            @foreach($locations as $key => $v_locat)
+                                <tr>
+                                    <td>
+                                        {{ $key+1 }}
+                                    </td>
+                                    <td>
+                                        <span class="h5 text-inherit">
+                                            {{$v_locat->name ?? ''}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-white btn-sm" data-bs-toggle="modal" data-bs-target="#locationDelete__{{ $v_locat->id }}"s>
+                                            <i class="bi-pencil-fill me-1"></i>
+                                            Edit
+                                        </button>
+                                        <form action="{{ route('admin.locations.destroy', $v_locat->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-white btn-sm">
+                                                <i class="bi-x-lg me-1"></i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
 
-                            <tr>
-                                <td><span class="h5 text-inherit">Rangpur</span></td>
-                                <td>Bangladesh</td>
-                                <td>
-                                    <a href="/./admin/organizations/1/edit/index.html" class="btn btn-white btn-sm"><i
-                                            class="bi-pencil-fill me-1"></i> Edit</a>
-                                    <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#DeleteWarning"><i class="bi-x-lg me-1"></i> Delete</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><span class="h5 text-inherit">Kolkata</span></td>
-                                <td>India</td>
-                                <td>
-                                    <a href="/./admin/organizations/1/edit/index.html" class="btn btn-white btn-sm"><i
-                                            class="bi-pencil-fill me-1"></i> Edit</a>
-                                    <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#DeleteWarning"><i class="bi-x-lg me-1"></i> Delete</button>
-                                </td>
-                            </tr>
-
+                                    <div id="locationDelete__{{ $v_locat->id }}" class="modal fade" tabindex="-1" role="dialog"
+                                        aria-labelledby="DeleteWarningTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="DeleteWarningTitle">
+                                                        Create Location
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('admin.locations.update', $v_locat->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="fron-group">
+                                                                <label for="">Location Name</label>
+                                                                <input type="text" name="name" value="{{$v_locat->name}}" class="form-control" placeholder="Location Name" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-bs-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-danger">
+                                                            Update
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
-                <!-- End Table -->
-
-                <!-- Footer -->
-                <div class="card-footer">
-                    <!-- Pagination -->
-                    <div class="d-flex justify-content-center justify-content-sm-end">
-                        <nav id="datatableWithPaginationPagination" aria-label="Activity pagination"></nav>
-                    </div>
-                    <!-- End Pagination -->
-                </div>
-                <!-- End Footer -->
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Modal -->
-    <div id="DeleteWarning" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteWarningTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="DeleteWarningTitle">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
-                        eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </div>
             </div>
         </div>
     </div>
-    <!-- End Modal -->
 @endsection
