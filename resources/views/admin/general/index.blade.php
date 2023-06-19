@@ -27,7 +27,7 @@
 
       <!-- Stats -->
       <div class="row">
-        
+
             <!-- Card -->
             <div class="card">
               <div class="card-header">

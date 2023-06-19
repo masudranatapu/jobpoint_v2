@@ -5,7 +5,8 @@ use App\Http\Controllers\HomeController;
 
 // admin
 use App\Http\Controllers\Admin\DashboardController;
-
+use App\Http\Controllers\Admin\LocationsController;
+use App\Http\Controllers\Admin\DepartmentController;
 // user
 use App\Http\Controllers\User\InformationController;
 
@@ -33,14 +34,13 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     // jobs
     Route::get('/jobs', [DashboardController::class, 'jobs'])->name('jobs');
     Route::get('/job-types', [DashboardController::class, 'jobTypes'])->name('job.types');
-    // candidates 
+    // candidates
     Route::get('/candidates', [DashboardController::class, 'candidates'])->name('candidates');
     // categories
     Route::get('/categories', [DashboardController::class, 'categories'])->name('categories');
     // currencies
     Route::get('/currencies', [DashboardController::class, 'currencies'])->name('currencies');
     // departments
-    Route::get('/departments', [DashboardController::class, 'departments'])->name('departments');
     // designations
     Route::get('/designations', [DashboardController::class, 'designations'])->name('designations');
     // experience
@@ -48,7 +48,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     // industries
     Route::get('/industries', [DashboardController::class, 'industries'])->name('industries');
     // locations
-    Route::get('/locations', [DashboardController::class, 'locations'])->name('locations');
+    Route::resource('locations', LocationsController::class);
+    Route::resource('departments', DepartmentController::class);
     // sallary
     Route::get('/salary-types', [DashboardController::class, 'salaryTypes'])->name('salary.types');
     // skills

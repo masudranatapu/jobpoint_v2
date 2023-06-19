@@ -28,7 +28,7 @@ class DashboardController extends Controller
         return view('admin.jobs.job_types');
     }
 
-    
+
     public function candidates()
     {
         return view('admin.candidates.index');
@@ -38,12 +38,12 @@ class DashboardController extends Controller
     {
         return view('admin.categories.index');
     }
-    
+
     public function currencies()
     {
         return view('admin.currencies.index');
     }
-    
+
     public function departments()
     {
         return view('admin.departments.index');
@@ -58,22 +58,15 @@ class DashboardController extends Controller
     {
         return view('admin.experience.index');
     }
-    
+
     public function industries()
     {
         return view('admin.industries.index');
     }
 
-    public function locations()
-    {
-        
-        return view('admin.locations.index');
-    }
-
-
     public function salaryTypes()
     {
-        
+
         return view('admin.salary.salary_types');
     }
 
