@@ -176,8 +176,6 @@
         </div>
 
     </div>
-
-
     <!-- Modal -->
     <div id="DeleteWarning" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteWarningTitle"
         aria-hidden="true">
