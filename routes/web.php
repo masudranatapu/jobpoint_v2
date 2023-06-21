@@ -9,7 +9,8 @@ use App\Http\Controllers\Admin\LocationsController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\JobController;
-// user 
+use App\Http\Controllers\Admin\ApplicantController;
+// user
 use App\Http\Controllers\User\InformationController;
 
 /*
@@ -37,7 +38,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('/jobs', [DashboardController::class, 'jobs'])->name('jobs');
     Route::get('/job-types', [DashboardController::class, 'jobTypes'])->name('job.types');
     // candidates
-    Route::get('/candidates', [DashboardController::class, 'candidates'])->name('candidates');
+    Route::get('/candidates', [ApplicantController::class, 'index'])->name('candidates');
+    Route::post('/candidates/store', [ApplicantController::class, 'store'])->name('candidates.store');
+    Route::post('/candidates/view', [ApplicantController::class, 'view'])->name('candidates.view');
+    Route::post('/candidates/update/{id}', [ApplicantController::class, 'update'])->name('candidates.update');
+    Route::get('/candidates/delete/{id}', [ApplicantController::class, 'delete'])->name('candidates.delete');
     // categories
     Route::get('/categories', [DashboardController::class, 'categories'])->name('categories');
     // currencies

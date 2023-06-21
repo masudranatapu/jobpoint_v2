@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('job_applicant_id')->nullable();
             $table->string('question')->nullable();
             $table->string('answer')->nullable();
+            $table->string('attachment')->nullable();
             $table->timestamps();
         });
     }

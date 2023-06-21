@@ -22,13 +22,7 @@ class DashboardController extends Controller
     {
         return view('admin.jobs.job_types');
     }
-
-
-    public function candidates()
-    {
-        return view('admin.candidates.index');
-    }
-
+    
     public function categories()
     {
         return view('admin.categories.index');

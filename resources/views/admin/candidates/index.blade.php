@@ -1,6 +1,5 @@
 @extends('admin.layout.app')
 
-
 @section('content')
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -15,9 +14,9 @@
                         <i class="bi-people me-1"></i> Add Candidate
                     </a>
                     <!-- <a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#inviteUserModal">
-                        <i class="bi-archive me-1"></i>
-                        View Archives
-                    </a> -->
+                            <i class="bi-archive me-1"></i>
+                            View Archives
+                        </a> -->
                 </div>
                 <div id="AddCandidate" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteWarningTitle"
                     aria-hidden="true">
@@ -25,9 +24,10 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="DeleteWarningTitle">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
-                            <form action="{{ route('admin.jobs.store') }}" method="POST">
+                            <form action="{{ route('admin.candidates.store') }}" method="POST">
                                 @csrf
                                 <div class="modal-body">
                                     <div class="form-group mb-3 row">
@@ -36,7 +36,8 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-md-9">
-                                            <input type="text" required value="{{ old('name') }}" name="first_name" class="form-control" placeholder="First name">
+                                            <input type="text" required value="{{ old('name') }}" name="first_name"
+                                                class="form-control" placeholder="First name">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3 row">
@@ -45,7 +46,8 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-md-9">
-                                            <input type="text" required value="{{ old('name') }}" name="last_name" class="form-control" placeholder="Last Name">
+                                            <input type="text" required value="{{ old('name') }}" name="last_name"
+                                                class="form-control" placeholder="Last Name">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3 row">
@@ -54,7 +56,8 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-md-9">
-                                            <input type="email" required value="{{ old('email') }}" name="email" class="form-control" placeholder="Email address">
+                                            <input type="email" required value="{{ old('email') }}" name="email"
+                                                class="form-control" placeholder="Email address">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3 row">
@@ -76,7 +79,8 @@
                                             Date of birth
                                         </label>
                                         <div class="col-md-9">
-                                            <input type="date" value="{{old('dob')}}" name="dob" class="form-control" placeholder="Date of birth">
+                                            <input type="date" value="{{ old('dob') }}" name="dob"
+                                                class="form-control" placeholder="Date of birth">
                                         </div>
                                     </div>
                                     <div class="form-group mb-3 row">
@@ -86,8 +90,9 @@
                                         </label>
                                         <div class="col-md-9">
                                             <select name="job_id" class="form-control">
-                                                <option value="">One</option>
-                                                <option value="">Two</option>
+                                                @foreach ($jobs as $job)
+                                                    <option value="{{ $job->id }}">{{ $job->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -135,7 +140,8 @@
                     </div>
                 </div>
                 <div class="table-responsive datatable-custom">
-                    <table id="datatableColumnSearch"class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" >
+                    <table
+                        id="datatableColumnSearch"class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
                                 <th>Name</th>
@@ -147,91 +153,49 @@
                                 <th>Applied At</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
-                                <th>
-                                    <input type="text" id="column1_search" class="form-control form-control-sm"
-                                        placeholder="Search name">
-                                </th>
-                                <th>
-                                    <input type="text" id="column2_search" class="form-control form-control-sm"
-                                        placeholder="Search email">
-                                </th>
-                                <th>
-                                    <input type="text" id="column3_search" class="form-control form-control-sm"
-                                        placeholder="Search phone">
-                                </th>
-                                <th>
-                                    <input type="text" id="column4_search" class="form-control form-control-sm"
-                                        placeholder="Search job">
-                                </th>
-                                <th>
-                                    <input type="text" id="column5_search" class="form-control form-control-sm"
-                                        placeholder="Search location">
-                                </th>
-                                <th>
-                                    <div class="tom-select-custom">
-                                        <select class="js-select js-datatable-filter form-select form-select-sm form-select-borderless" >
-                                            <option value="null" selected>Any</option>
-                                            <option value="Applied">Applied</option>
-                                            <option value="Phone Screen">Phone Screen</option>
-                                            <option value="Rejected">Rejected</option>
-                                            <option value="Interview">Interview</option>
-                                            <option value="Hired">Hired</option>
-                                        </select>
-                                    </div>
-                                </th>
-                                <th></th>
-                                <th></th>
-                            </tr>
                         </thead>
-
                         <tbody>
-                            <tr>
-                                <td><span class="h5 text-inherit">Shoriful Islam</span></td>
-                                <td>shorif@gmail.com</td>
-                                <td>+880 1811223344</td>
-                                <td>Sales And Marketing Officer</td>
-                                <td>Dhaka (BD)</td>
-                                <td><span class="legend-indicator bg-success"></span>Applied</td>
-                                <td>13 May, 2022 11:40 PM</td>
-                                <td>
-                                    <a href="/./admin/organizations/1/index.html" class="btn btn-white btn-sm"><i
-                                            class="bi-eye me-1"></i> View</a>
-                                    <a href="/./admin/organizations/1/edit/index.html" class="btn btn-white btn-sm"><i
-                                            class="bi-pencil-fill me-1"></i> Edit</a>
-                                    <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#DeleteWarning"><i class="bi-x-lg me-1"></i> Delete</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><span class="h5 text-inherit">Md Shek Faride</span></td>
-                                <td>shek@gmail.com</td>
-                                <td>+880 1711223344</td>
-                                <td>Front-End Developer</td>
-                                <td>Mumbai (IN)</td>
-                                <td><span class="legend-indicator bg-danger"></span>Phone Screen</td>
-                                <td>15 Jun, 2022 09:40 PM</td>
-                                <td>
-                                    <a href="/./admin/organizations/1/index.html" class="btn btn-white btn-sm"><i
-                                            class="bi-eye me-1"></i> View</a>
-                                    <a href="/./admin/organizations/1/edit/index.html" class="btn btn-white btn-sm"><i
-                                            class="bi-pencil-fill me-1"></i> Edit</a>
-                                    <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#DeleteWarning"><i class="bi-x-lg me-1"></i> Delete</button>
-                                </td>
-                            </tr>
-
+                            @foreach ($applicants as $key => $app_value)
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td><span class="h5 text-inherit">Shoriful Islam</span></td>
+                                    <td>shorif@gmail.com</td>
+                                    <td>+880 1811223344</td>
+                                    <td>Sales And Marketing Officer</td>
+                                    <td>Dhaka (BD)</td>
+                                    <td><span class="legend-indicator bg-success"></span>Applied</td>
+                                    <td>13 May, 2022 11:40 PM</td>
+                                    <td>
+                                        <a href="/./admin/organizations/1/index.html" class="btn btn-white btn-sm"><i
+                                                class="bi-eye me-1"></i> View</a>
+                                        <a href="/./admin/organizations/1/edit/index.html" class="btn btn-white btn-sm"><i
+                                                class="bi-pencil-fill me-1"></i> Edit</a>
+                                        <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#DeleteWarning"><i class="bi-x-lg me-1"></i> Delete</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="card-footer">
-                    <!-- Pagination -->
-                    <div class="d-flex justify-content-center justify-content-sm-end">
-                        <nav id="datatableWithPaginationPagination" aria-label="Activity pagination"></nav>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteWarningTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" id="showApplicantInfo">
+            
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('js)
+    <script>
+        function applicentView() {
+
+        }
+    </script>
+@endpush

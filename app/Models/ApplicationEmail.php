@@ -10,7 +10,7 @@ class ApplicationEmail extends Model
     use HasFactory;
 
 
-    protected $table = "application_emails",
+    protected $table = "application_emails";
 
     protected $fillable = [
         'applicant_id',
