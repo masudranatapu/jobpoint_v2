@@ -27,7 +27,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <form action="{{ route('admin.candidates.store') }}" method="POST">
+                            <form action="{{ route('admin.candidates.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
                                     <div class="form-group mb-3 row">
@@ -144,34 +144,41 @@
                         id="datatableColumnSearch"class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
+                                <th>SL No</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
                                 <th>Job</th>
-                                <th>Location</th>
-                                <th>Status</th>
-                                <th>Applied At</th>
+                                <th>Gender</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($applicants as $key => $app_value)
+                                @php
+                                    $a_name = App\Models\ApplicationEmail::where('applicant_id', $app_value->id)->first();
+                                    $job_name = App\Models\Job::where('id', $a_name->job_post_id)->first();
+                                @endphp
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td><span class="h5 text-inherit">Shoriful Islam</span></td>
-                                    <td>shorif@gmail.com</td>
-                                    <td>+880 1811223344</td>
-                                    <td>Sales And Marketing Officer</td>
-                                    <td>Dhaka (BD)</td>
-                                    <td><span class="legend-indicator bg-success"></span>Applied</td>
-                                    <td>13 May, 2022 11:40 PM</td>
+                                    <td><span class="h5 text-inherit">{{ $app_value->first_name ?? '' }} {{ $app_value->last_name ?? '' }} </span></td>
                                     <td>
-                                        <a href="/./admin/organizations/1/index.html" class="btn btn-white btn-sm"><i
-                                                class="bi-eye me-1"></i> View</a>
-                                        <a href="/./admin/organizations/1/edit/index.html" class="btn btn-white btn-sm"><i
-                                                class="bi-pencil-fill me-1"></i> Edit</a>
-                                        <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#DeleteWarning"><i class="bi-x-lg me-1"></i> Delete</button>
+                                        <a href="mailto:{{$app_value->email}}">{{$app_value->email}}</a>
+                                    </td>
+                                    <td>
+                                        {{ $job_name->name ?? '' }}
+                                    </td>
+                                    <td>
+                                        {{ $app_value->gender ?? '' }}
+                                    </td>
+                                    <td>
+                                        <button type="button" onclick="applicentView({{$app_value->id}})" class="btn btn-white btn-sm">
+                                            <i class="bi-eye me-1"></i>
+                                            View
+                                        </button>
+                                        <a href="{{ route('admin.candidates.delete', $app_value->id) }}" onclick="return confirm('Are you sure?');" class="btn btn-white btn-sm" data-bs-toggle="modal" data-bs-target="#DeleteWarning">
+                                            <i class="bi-x-lg me-1"></i>
+                                            Delete
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -182,7 +189,7 @@
         </div>
     </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteWarningTitle"
+    <div class="modal fade" id="applicaiton_show" tabindex="-1" role="dialog" aria-labelledby="DeleteWarningTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content" id="showApplicantInfo">
@@ -194,8 +201,24 @@
 
 @push('js)
     <script>
-        function applicentView() {
-
+        function applicentView(id) {
+            if(id) {
+                $.ajax({
+                    type    : "POST",
+                    url     : "{{ route('admin.candidates.view') }}",
+                    data    : {
+                        id: id,
+                        _token: '{{csrf_token()}}',
+                    },
+                    success : function(data) {
+                        console.log(data);
+                        $("#applicaiton_show").modal('show');
+                        $("#showApplicantInfo").html(data);
+                    },
+                });
+            }else {
+            
+            }
         }
     </script>
 @endpush

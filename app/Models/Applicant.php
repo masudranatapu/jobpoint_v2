@@ -27,6 +27,7 @@ class Applicant extends Model
     {
         DB::beginTransaction();
             try {
+                // dd($request->all());
                 $applicant                  = new Applicant();
                 $applicant->first_name      = $request->first_name;
                 $applicant->last_name       = $request->last_name;

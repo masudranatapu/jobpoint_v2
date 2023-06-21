@@ -2,7 +2,7 @@
     <h5 class="modal-title" id="DeleteWarningTitle">Modal title</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-<form action="{{ route('admin.jobs.store') }}" method="POST">
+<form action="{{ route('admin.candidates.update', $applicant->id) }}" method="POST">
     @csrf
     <div class="modal-body">
         <div class="form-group mb-3 row">
@@ -11,7 +11,7 @@
                 <span class="text-danger">*</span>
             </label>
             <div class="col-md-9">
-                <input type="text" required value="{{ old('name') }}" name="first_name" class="form-control"
+                <input type="text" required value="{{ old('first_name') }}" name="first_name" class="form-control"
                     placeholder="First name">
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <span class="text-danger">*</span>
             </label>
             <div class="col-md-9">
-                <input type="text" required value="{{ old('name') }}" name="last_name" class="form-control"
+                <input type="text" required value="{{ old('last_name') }}" name="last_name" class="form-control"
                     placeholder="Last Name">
             </div>
         </div>
@@ -65,8 +65,11 @@
             </label>
             <div class="col-md-9">
                 <select name="job_id" class="form-control">
-                    <option value="">One</option>
-                    <option value="">Two</option>
+                    @foreach ($jobs as $job)
+                        <option value="{{ $job->id }}" @if($jobinfo->job_post_id == $job->id) selected @endif>
+                            {{ $job->name }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -78,6 +81,16 @@
                 <input type="file" name="resume" class="form-control">
             </div>
         </div>
+        @if($application_answer)
+            <div class="form-group mb-3 row">
+                <label class="col-md-3">
+                    Resume
+                </label>
+                <div class="col-md-9">
+                    <img scr="{{ asset($application_answer->attachment) }}" width="100" height="100" alt=""/>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>

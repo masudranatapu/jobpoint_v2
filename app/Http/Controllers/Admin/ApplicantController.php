@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Applicant;
 use App\Models\Job;
+use App\Models\ApplicationEmail;
+use App\Models\ApplicationAnswer;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ApplicantController extends Controller
 {
@@ -49,7 +52,9 @@ class ApplicantController extends Controller
     {
         $applicant = Applicant::findOrFail($request->id);
         $jobs = Job::latest()->get();
-        $html = view('admin.candidates.view', compact('applicant', 'jobs'))->render();
+        $application_answer = ApplicationAnswer::where('job_applicant_id',$applicant->id)->first();
+        $jobinfo = ApplicationEmail::where('applicant_id',$applicant->id)->first();
+        $html = view('admin.candidates.view', compact('applicant', 'jobs', 'application_answer', 'jobinfo'))->render();
         return response()->json($html);
     }
 

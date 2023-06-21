@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('job_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('brief');
+            $table->string('name')->nullable();
+            $table->string('brief')->nullable();
             $table->timestamps();
         });
     }
